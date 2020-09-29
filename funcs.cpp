@@ -8,7 +8,7 @@ bool isDivisibleBy(int n, int d) {
     @param d denomenator
     @return bool if n is divisible by d
     */
-    if (d == 0) {
+    if (d == 0) { // Any number divided by 0 is undefined
         return false;
     }
     if ((n % d) == 0) {
@@ -24,10 +24,10 @@ bool isPrime(int n) {
     @param n an integer
     @return bool if n is prime
     */
-    if (n < 2) {
+    if (n < 2) { // Prime numbers have to be >= 2
         return false;
     }
-    for (int i = 2; i < (n/2 + 1); i++) {
+    for (int i = 2; i < ((n / 2) + 1); i++) {
         if (isDivisibleBy(n, i)) {
             return false;
         }
@@ -42,13 +42,11 @@ int nextPrime(int n) {
     @return next_prime smallest prime greater than n
     */
 
-   int next_prime = (n + 1);
-
+    int next_prime = (n + 1);
     while (!isPrime(next_prime)) {
-        next_prime++;
+        next_prime = next_prime + 1;
     }
     return next_prime;
-
 }
 
 int countPrimes(int a, int b) {
@@ -60,9 +58,9 @@ int countPrimes(int a, int b) {
     */
 
     int num_primes = 0;
-    for (int i = (a); i <= b; i++) {
+    for (int i = a; i <= b; i++) {
         if (isPrime(i)) {
-            num_primes++;
+            num_primes = num_primes + 1;
         }
     }
     return num_primes;
@@ -73,12 +71,11 @@ bool isTwinPrime(int n) {
     Checks if n is a twin prime.
     (A prime number N is called a twin prime if 
     either N-2 or N+2 (or both of them) is also a prime.)
-
     @param n an integer
     @return bool if n is a twin prime
     */
     if (isPrime(n)) {
-        if (isPrime(n+2) || isPrime(n-2)) {
+        if (isPrime(n + 2) || isPrime(n - 2)) {
             return true;
         }
     }
@@ -98,20 +95,24 @@ int nextTwinPrime(int n) {
     return twin_prime;
 }
 
-int prevPrime(int a) {
-    while (a >= 2) {
-        if (isPrime(a-1)) {
-            return (a-1);
+int prevPrime(int n) {
+    /*
+    Finds the largest prime smaller than n.
+    @param n an integer
+    @return int largest prime less than n.
+    */
+    while (n >= 2) {
+        if (isPrime(n - 1)) {
+            return (n - 1);
         }
-        a--;
+        n = n - 1;
     }
-    return -1;
+    return -1; // If there is no previous prime, it returns -1.
 }
 
 int largestTwinPrime(int a, int b) {
     /*
     Returns the largest twin prime in the range a ≤ N ≤ b.
-    If there is no twin primes in range, it returns -1.
     @param a lower integer limit of interval to find twin primes
     @param b upper integer limit of interval to find twin primes
     @return largest_twin the largest twin prime in interval [a,b]
@@ -121,5 +122,5 @@ int largestTwinPrime(int a, int b) {
             return i;
         }
     }
-    return -1;
+    return -1; // If there is no twin primes in range, it returns -1.
 }
