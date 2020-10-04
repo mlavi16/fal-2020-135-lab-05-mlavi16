@@ -100,6 +100,17 @@ TEST_CASE("nextTwinPrime(integer)") {
 
 }
 
-// TEST_CASE("largestTwinPrime(lower limit, upper limit)") {
+TEST_CASE("largestTwinPrime(lower limit, upper limit)") {
+    // no twin primes
+    CHECK(largestTwinPrime(-40, 2) == -1); // negative numbers
+    CHECK(largestTwinPrime(62, 70) == -1);
+    CHECK(largestTwinPrime(8, 8) == -1); //not a prime
+    CHECK(largestTwinPrime(23, 23) == -1); //prime but not twin prime
+    CHECK(largestTwinPrime(49, 3) == -1); // range is backwards
 
-// }
+    CHECK(largestTwinPrime(7, 9) == 7); // lower limit is largest twin prime
+    CHECK(largestTwinPrime(7, 30) == 29);
+    CHECK(largestTwinPrime(7, 31) == 31); //upper limit is the largest twin prime
+    CHECK(largestTwinPrime(11, 11) == 11);
+    CHECK(largestTwinPrime(0, 15485661) == 15485653); //large number
+}
