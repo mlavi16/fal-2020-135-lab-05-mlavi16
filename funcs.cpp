@@ -72,7 +72,7 @@ bool isTwinPrime(int n) {
     (A prime number N is called a twin prime if 
     either N-2 or N+2 (or both of them) is also a prime.)
     @param n an integer
-    @return bool if n is a twin prime
+    @return bool: true if the given n is a twin prime
     */
     if (isPrime(n)) {
         if (isPrime(n + 2) || isPrime(n - 2)) {
@@ -115,8 +115,11 @@ int largestTwinPrime(int a, int b) {
     Returns the largest twin prime in the range a ≤ N ≤ b.
     @param a lower integer limit of interval to find twin primes
     @param b upper integer limit of interval to find twin primes
-    @return largest_twin the largest twin prime in interval [a,b]
+    @return largest_twin the largest twin prime in interval [a,b], or -1 if there is no twin prime
     */
+    if ((b < 3)) {
+        return -1;
+    }
     for (int i = b; i >= a; i = prevPrime(i)) {
         if (isTwinPrime(i)) {
             return i;
